@@ -111,7 +111,8 @@ class XmppConnection {
     };
     printLogForMethodCall('send_message', params);
     final String status = await _channel.invokeMethod('send_message', params);
-    printLogForMethodCall('send_message result', 'status=$status, params=$params');
+    printLogForMethodCall(
+        'send_message result', 'status=$status, params=$params');
     return status;
   }
 
@@ -202,7 +203,8 @@ class XmppConnection {
           } else if (eventModel.type == 'presence') {
             PresentModel presentModel = PresentModel.fromJson(dataEvent);
             element.onPresenceChange(presentModel);
-          } else if (eventModel.type == 'chatstate') {
+          }
+          if (eventModel.type == 'chatstate') {
             ChatState chatState = ChatState.fromJson(dataEvent);
             element.onChatStateChange(chatState);
           } else {
@@ -435,7 +437,8 @@ class XmppConnection {
     await _channel.invokeMethod('change_presence_type', params);
   }
 
-  Future<Map<Object?, Object?>> getPrivateStorage(String category, String name) async {
+  Future<Map<Object?, Object?>> getPrivateStorage(
+      String category, String name) async {
     print(" Plugin : getPrivateStorage, category $category, name $name ");
     final params = {
       "category": category,
@@ -444,8 +447,10 @@ class XmppConnection {
     return await _channel.invokeMethod('get_private_storage', params);
   }
 
-  Future<void> setPrivateStorage(String category, String name, Map<String, String> dict) async {
-    print(" Plugin : setPrivateStorage, category $category, name $name, dict $dict ");
+  Future<void> setPrivateStorage(
+      String category, String name, Map<String, String> dict) async {
+    print(
+        " Plugin : setPrivateStorage, category $category, name $name, dict $dict ");
     final params = {
       "category": category,
       "name": name,
