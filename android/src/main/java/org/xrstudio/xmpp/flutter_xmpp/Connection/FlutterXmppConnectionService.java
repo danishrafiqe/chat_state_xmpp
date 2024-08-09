@@ -79,7 +79,7 @@ public class FlutterXmppConnectionService extends Service {
             stopSelf();
         } catch (IOException | SmackException | XMPPException e) {
             FlutterXmppConnectionService.sConnectionState = ConnectionState.FAILED;
-            Utils.printLog(" Something went wrong while connecting, make sure the credentials are right and try again: ");
+            Utils.printLog(" Something went wrong while connecting, make sure the credentials are right and try again: " + e);
             e.printStackTrace();
             stopSelf();
         }
