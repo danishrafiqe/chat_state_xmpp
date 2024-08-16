@@ -828,6 +828,8 @@ public class FlutterXmppPlugin implements MethodCallHandler, FlutterPlugin, Acti
 
     // login
     private void doLogin() {
+        Utils.printLog("Trying To Connect With XMPP :" + FlutterXmppConnectionService.getState().toString());
+
         // Check if the user is already connected or not ? if not then start login process.
         if (FlutterXmppConnectionService.getState().equals(ConnectionState.DISCONNECTED) || FlutterXmppConnectionService.getState().equals(ConnectionState.FAILED)) {
             Intent i = new Intent(activity, FlutterXmppConnectionService.class);
@@ -842,7 +844,7 @@ public class FlutterXmppPlugin implements MethodCallHandler, FlutterPlugin, Acti
             activity.startService(i);
         } else {
             Utils.printLog("DO NOT call login because connection state is " + FlutterXmppConnectionService.getState().toString());
-            if (FlutterXmppConnectionService.getState().equals(ConnectionState.FAILED) || FlutterXmppConnectionService.getState().equals(ConnectionState.CONNECTING)) {
+            if (FlutterXmppConnectionService.getState().equals(ConnectionState.CONNECTING)) {
                 Intent i1 = new Intent(activity, FlutterXmppConnectionService.class);
                 activity.stopService(i1);
             }
