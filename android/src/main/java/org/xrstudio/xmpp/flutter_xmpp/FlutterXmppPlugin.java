@@ -843,8 +843,10 @@ public class FlutterXmppPlugin implements MethodCallHandler, FlutterPlugin, Acti
             i.putExtra(Constants.AUTOMATIC_RECONNECTION, automaticReconnection);
             activity.startService(i);
         } else {
+
             Utils.printLog("DO NOT call login because connection state is " + FlutterXmppConnectionService.getState().toString());
             if (FlutterXmppConnectionService.getState().equals(ConnectionState.CONNECTING)) {
+                FlutterXmppConnectionService.sConnectionState = ConnectionState.CONNECTING;
                 Intent i1 = new Intent(activity, FlutterXmppConnectionService.class);
                 activity.stopService(i1);
             }
